@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Content Engine — an Acclivity product</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E1F2B;
+    --teal:#00B3A6;
+    --purple:#5B3AC4;
+    --gold:#F2B53D;
+    --paper:#F3F5F6;
+    --paper-2:#FFFFFF;
+    --body:#33424C;
+    --line:#DDE3E6;
+    --line-dark:rgba(243,245,246,.16);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--body);
+    background:var(--paper);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{font-family:'Sora',sans-serif;color:var(--ink);letter-spacing:-.02em}
+  .wrap{max-width:940px;margin:0 auto;padding:0 28px}
+  section{padding:76px 0}
+
+  /* ---------- brand mark: the rise ---------- */
+  .rise{display:inline-flex;align-items:flex-end;gap:6px;height:34px}
+  .rise span{width:11px;border-radius:4px 4px 2px 2px;display:block}
+  .rise span:nth-child(1){height:16px;background:var(--teal)}
+  .rise span:nth-child(2){height:25px;background:var(--purple)}
+  .rise span:nth-child(3){height:34px;background:var(--gold)}
+  .brandline{display:flex;align-items:center;gap:12px}
+  .brandline .name{font-family:'Sora',sans-serif;font-weight:700;font-size:18px;color:#fff;letter-spacing:-.01em}
+  .brandline .sub{font-size:13px;color:rgba(243,245,246,.6)}
+
+  /* ---------- hero ---------- */
+  .hero{background:var(--ink);color:var(--paper);padding:0;position:relative;overflow:hidden}
+  .hero .wrap{padding-top:34px;padding-bottom:96px}
+  .hero-top{display:flex;justify-content:space-between;align-items:center;padding-bottom:70px}
+  .hero-riseband{display:flex;align-items:flex-end;gap:10px;height:60px;margin-bottom:34px}
+  .hero-riseband i{display:block;width:52px;border-radius:6px 6px 3px 3px}
+  .hero-riseband i:nth-child(1){height:22px;background:var(--teal)}
+  .hero-riseband i:nth-child(2){height:38px;background:linear-gradient(180deg,var(--purple),var(--teal))}
+  .hero-riseband i:nth-child(3){height:60px;background:linear-gradient(180deg,var(--gold),var(--purple))}
+  .hero h1{color:#fff;font-size:clamp(34px,5.4vw,58px);font-weight:800;line-height:1.05;max-width:15ch}
+  .hero p.lede{font-size:clamp(17px,2.2vw,20px);color:rgba(243,245,246,.82);max-width:56ch;margin-top:22px}
+  .hero-cta{margin-top:36px;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+  .btn{
+    font-family:'Sora',sans-serif;font-weight:600;font-size:16px;
+    background:var(--gold);color:var(--ink);
+    padding:15px 26px;border-radius:10px;text-decoration:none;display:inline-block;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(242,181,61,.28)}
+  .btn.ghost{background:transparent;color:#fff;border:1.5px solid var(--line-dark)}
+  .btn.ghost:hover{box-shadow:none;border-color:var(--teal)}
+  .hero-proof{margin-top:44px;display:flex;gap:36px;flex-wrap:wrap;border-top:1px solid var(--line-dark);padding-top:26px}
+  .hero-proof div{max-width:26ch}
+  .hero-proof b{font-family:'Sora',sans-serif;color:var(--teal);font-size:15px;display:block;margin-bottom:2px}
+  .hero-proof small{color:rgba(243,245,246,.65);font-size:14px}
+
+  /* ---------- problem ---------- */
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--purple);margin-bottom:14px}
+  h2{font-size:clamp(26px,3.6vw,38px);font-weight:700;line-height:1.12;max-width:20ch}
+  .lead-p{font-size:18px;max-width:62ch;margin-top:18px}
+  .problem{background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .problem .cost{
+    margin-top:30px;display:grid;grid-template-columns:1fr 1fr;gap:0;
+    border:1px solid var(--line);border-radius:14px;overflow:hidden;max-width:640px;
+  }
+  .problem .cost div{padding:22px 24px}
+  .problem .cost div:first-child{border-right:1px solid var(--line);background:#FBFCFC}
+  .problem .cost h4{font-family:'Sora',sans-serif;color:var(--ink);font-size:15px;margin-bottom:6px}
+  .problem .cost p{font-size:15px}
+
+  /* ---------- what it is ---------- */
+  .what h2{max-width:24ch}
+  .deliverables{margin-top:34px;display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .deliverables li{list-style:none;background:var(--paper);padding:22px 24px}
+  .deliverables li b{font-family:'Sora',sans-serif;color:var(--ink);display:block;font-size:16px;margin-bottom:5px}
+  .deliverables li span{font-size:15px}
+
+  /* ---------- how it works: real sequence ---------- */
+  .how{background:var(--ink);color:var(--paper)}
+  .how h2,.how h3{color:#fff}
+  .how .eyebrow{color:var(--gold)}
+  .steps{margin-top:38px;display:grid;gap:20px}
+  .step{display:grid;grid-template-columns:44px 1fr;gap:20px;align-items:start;padding-bottom:20px;border-bottom:1px solid var(--line-dark)}
+  .step:last-child{border-bottom:none}
+  .step .n{font-family:'Sora',sans-serif;font-weight:700;font-size:20px;color:var(--ink);background:var(--teal);width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center}
+  .step:nth-child(2) .n{background:var(--teal)}
+  .step:nth-child(3) .n{background:var(--purple);color:#fff}
+  .step:nth-child(4) .n{background:var(--purple);color:#fff}
+  .step:nth-child(5) .n{background:var(--gold)}
+  .step h3{font-size:18px;margin-bottom:4px}
+  .step p{color:rgba(243,245,246,.78);font-size:15px;max-width:60ch}
+
+  /* ---------- pricing ---------- */
+  .pricing .setup{margin-top:14px;font-size:15px}
+  .tiers{margin-top:36px;display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:16px;align-items:stretch}
+  .tier{border:1px solid var(--line);border-radius:16px;padding:28px 24px;background:var(--paper-2);display:flex;flex-direction:column}
+  .tier.core{border:2px solid var(--gold);background:#fff;box-shadow:0 18px 40px rgba(14,31,43,.10);position:relative}
+  .tier .rec{position:absolute;top:-13px;left:24px;background:var(--gold);color:var(--ink);font-family:'Sora',sans-serif;font-weight:600;font-size:12px;padding:4px 12px;border-radius:20px}
+  .tier .tname{font-family:'Sora',sans-serif;font-weight:700;color:var(--ink);font-size:19px}
+  .tier .price{font-family:'Sora',sans-serif;font-weight:800;color:var(--ink);font-size:32px;margin-top:10px;letter-spacing:-.02em}
+  .tier .price small{font-family:'Inter',sans-serif;font-weight:500;font-size:14px;color:var(--body)}
+  .tier ul{list-style:none;margin-top:18px;display:grid;gap:10px}
+  .tier li{font-size:14.5px;padding-left:22px;position:relative}
+  .tier li:before{content:"";position:absolute;left:0;top:8px;width:9px;height:9px;border-radius:3px;background:var(--teal)}
+  .tier.core li:before{background:var(--gold)}
+  .tier .foot{margin-top:auto;padding-top:18px;font-size:13px;color:#66727a}
+  .minnote{margin-top:22px;font-size:14px;color:#66727a}
+
+  /* ---------- fit ---------- */
+  .fit{background:var(--paper-2);border-top:1px solid var(--line)}
+  .fitcols{margin-top:30px;display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  .fitcols .col{padding:26px;border-radius:14px}
+  .fitcols .yes{background:#EAF7F5;border:1px solid #BDE6E1}
+  .fitcols .no{background:#F6F1FB;border:1px solid #E0D2F2}
+  .fitcols h4{font-family:'Sora',sans-serif;font-size:16px;color:var(--ink);margin-bottom:14px}
+  .fitcols ul{list-style:none;display:grid;gap:12px}
+  .fitcols li{font-size:15px;padding-left:24px;position:relative}
+  .fitcols .yes li:before{content:"✓";position:absolute;left:0;color:var(--teal);font-weight:700}
+  .fitcols .no li:before{content:"—";position:absolute;left:0;color:var(--purple);font-weight:700}
+
+  /* ---------- close ---------- */
+  .close{background:var(--ink);color:var(--paper);text-align:left}
+  .close h2{color:#fff;max-width:24ch}
+  .close p{color:rgba(243,245,246,.82);font-size:18px;max-width:58ch;margin-top:18px}
+  .close .btn{margin-top:30px}
+  footer{background:var(--ink);color:rgba(243,245,246,.5);padding:30px 0;border-top:1px solid var(--line-dark);font-size:13px}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+
+  @media (max-width:760px){
+    section{padding:56px 0}
+    .hero-top{padding-bottom:50px}
+    .problem .cost,.deliverables,.tiers,.fitcols{grid-template-columns:1fr}
+    .problem .cost div:first-child{border-right:none;border-bottom:1px solid var(--line)}
+    .tier.core{order:-1}
+    .hero-proof{gap:22px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <div class="brandline">
+        <span class="rise"><span></span><span></span><span></span></span>
+        <span>
+          <span class="name">Acclivity</span>
+          <span class="sub" style="display:block">The Content Engine</span>
+        </span>
+      </div>
+      <a href="#pricing" class="btn ghost" style="padding:10px 18px;font-size:14px">See pricing</a>
+    </div>
+
+    <div class="hero-riseband"><i></i><i></i><i></i></div>
+    <h1>Your business should be posting. You shouldn't have to.</h1>
+    <p class="lede">The Content Engine writes, designs, schedules, and publishes a month of on-brand content for your business, so your feed stays alive while you stay on the work that pays.</p>
+
+    <div class="hero-cta">
+      <a href="https://calendly.com/sera-ironveil/20-minute-inquiry" target="_blank" rel="noopener" class="btn">Book a 15-minute fit call</a>
+      <a href="#how" class="btn ghost">See how it works</a>
+    </div>
+
+    <div class="hero-proof">
+      <div><b>You approve once a month.</b><small>One batch, one yes. We handle the rest.</small></div>
+      <div><b>Built on your voice, not a template.</b><small>It sounds like your business, because we build it from your business.</small></div>
+      <div><b>Runs while you work.</b><small>Posts publish on schedule without you touching a thing.</small></div>
+    </div>
+  </div>
+</header>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="wrap">
+    <div class="eyebrow">The real reason your feed goes quiet</div>
+    <h2>You already know you should show up online. The day just never allows it.</h2>
+    <p class="lead-p">Payroll, customers, and the actual work eat every hour you meant to spend posting. So the account goes quiet. And quiet accounts don't bring in customers. The two ways out both have a catch:</p>
+    <div class="cost">
+      <div>
+        <h4>Hire an agency</h4>
+        <p>Two to five thousand a month, plus meetings, revisions, and a contract you have to babysit.</p>
+      </div>
+      <div>
+        <h4>Do it yourself</h4>
+        <p>You run out of hours by Tuesday, and the content that does go out feels rushed and off-brand.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IT IS -->
+<section class="what">
+  <div class="wrap">
+    <div class="eyebrow">What the Content Engine is</div>
+    <h2>A done-for-you content system, not another tool to learn.</h2>
+    <p class="lead-p">We build your brand voice once. Then we run a monthly cycle: content written the way your business actually talks, designed to match your brand, scheduled, and published to your company pages automatically. You give one batch approval. Everything after that runs on its own.</p>
+    <ul class="deliverables">
+      <li><b>On-brand posts, written in your voice</b><span>Real captions with a point of view, not filler that could belong to anyone.</span></li>
+      <li><b>Custom graphics matched to your brand</b><span>Every post looks like it came from your business, because it did.</span></li>
+      <li><b>Scheduled and auto-published for you</b><span>Posts go live on the days and times that work, hands-off.</span></li>
+      <li><b>A monthly strategy touch</b><span>We look at what's landing and shape the next batch around it.</span></li>
+      <li><b>A plain-English performance snapshot</b><span>What worked, what to do more of, in language you don't need a degree to read.</span></li>
+      <li><b>One point of contact</b><span>You talk to a person who knows your account, not a ticket queue.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="wrap">
+    <div class="eyebrow">How it works</div>
+    <h2>Four moves. Then it runs.</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="n">1</div>
+        <div>
+          <h3>Voice build, one time</h3>
+          <p>We capture how your business really talks and turn it into templates and a brand kit the whole system runs on. This is the setup, and it's the reason nothing sounds generic.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="n">2</div>
+        <div>
+          <h3>Monthly batch</h3>
+          <p>We draft the month's content, written and designed, and send it to you in one place. You read it, request any tweaks, and give a single yes.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="n">3</div>
+        <div>
+          <h3>Auto-publish</h3>
+          <p>Approved posts publish themselves on schedule to your company pages. You don't log in, you don't remember, you don't miss a week.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="n">4</div>
+        <div>
+          <h3>Read and adjust</h3>
+          <p>You get a short snapshot of what performed. We tune the next batch around it, so every month is a little sharper than the last.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <div class="eyebrow">Pricing</div>
+    <h2>One system, three sizes.</h2>
+    <p class="setup">Every plan starts with a one-time <b>$1,000 setup</b>: your voice build, brand templates, and publishing setup. That work is yours to keep.</p>
+
+    <div class="tiers">
+      <div class="tier">
+        <div class="tname">Spark</div>
+        <div class="price">$600<small>/month</small></div>
+        <ul>
+          <li>4 posts a month</li>
+          <li>Written and designed on brand</li>
+          <li>Scheduled and auto-published</li>
+          <li>Monthly performance snapshot</li>
+        </ul>
+        <div class="foot">Best for keeping a steady, credible presence.</div>
+      </div>
+
+      <div class="tier core">
+        <div class="rec">Most businesses start here</div>
+        <div class="tname">Engine</div>
+        <div class="price">$1,200<small>/month</small></div>
+        <ul>
+          <li>8 posts a month</li>
+          <li>Written and designed on brand</li>
+          <li>Scheduled and auto-published</li>
+          <li>Monthly strategy touch</li>
+          <li>Performance snapshot with next-month direction</li>
+        </ul>
+        <div class="foot">The full engine, running on schedule. 3-month minimum.</div>
+      </div>
+
+      <div class="tier">
+        <div class="tname">Overdrive</div>
+        <div class="price">$2,500<small>/month</small></div>
+        <ul>
+          <li>12 to 16 posts a month</li>
+          <li>Short-form video clips</li>
+          <li>Repurposing across channels</li>
+          <li>Monthly strategy call</li>
+          <li>Priority turnaround</li>
+        </ul>
+        <div class="foot">For businesses ready to be everywhere. 3-month minimum.</div>
+      </div>
+    </div>
+    <p class="minnote">No long contracts. Engine and Overdrive run on a 3-month minimum so the work has time to compound, then continue month to month. Cancel with 30 days' notice. Payments already made are non-refundable.</p>
+  </div>
+</section>
+
+<!-- FIT -->
+<section class="fit">
+  <div class="wrap">
+    <div class="eyebrow">Is this for you</div>
+    <h2>Built for owners who want it handled, not managed.</h2>
+    <div class="fitcols">
+      <div class="col yes">
+        <h4>This is for you if</h4>
+        <ul>
+          <li>You want a live, professional presence without running it yourself.</li>
+          <li>You're ready to show up consistently for at least the next 90 days.</li>
+          <li>You'd rather approve good work than produce it from scratch.</li>
+          <li>You know a quiet feed is costing you customers.</li>
+        </ul>
+      </div>
+      <div class="col no">
+        <h4>This isn't for you if</h4>
+        <ul>
+          <li>You want a viral guarantee. Nobody honest can sell you that.</li>
+          <li>You want one-off posts with no system behind them.</li>
+          <li>You want to approve every word every day. This is built to free your time, not fill it.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="close" id="book">
+  <div class="wrap">
+    <div class="eyebrow" style="color:var(--gold)">Start here</div>
+    <h2>Your competitors' feeds work while they sleep. Yours can too.</h2>
+    <p>Book a 15-minute fit call. I'll show you exactly what your first month would look like, built for your business, before you pay a dollar. If it's not a fit, I'll tell you that too.</p>
+    <a href="https://calendly.com/sera-ironveil/20-minute-inquiry" target="_blank" rel="noopener" class="btn" id="calendly-link">Book a 15-minute fit call</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>The Content Engine, an Acclivity product.</span>
+    <span class="brandline"><span class="rise" style="height:24px"><span></span><span></span><span></span></span></span>
+  </div>
+</footer>
+
+</body>
+</html>
